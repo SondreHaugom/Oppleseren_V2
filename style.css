@@ -1,0 +1,457 @@
+    /* Generelle stiler */
+    body {
+    font-family: 'Arial', sans-serif;
+    background-color: white; /* Fjord (10%) - lys og behagelig bakgrunn */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    color: #7B7B7A; /* Stein - god lesbarhet med mørk grå */
+    }
+
+
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #333;
+    border-radius: 34px;
+    transition: .4s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    header {
+    background-color: #ACC8B3; /* Vann - dyp, elegant farge */
+    color:black;
+        text-align: center;
+        padding: 20px;
+        width: 100%;
+        border-bottom: 3px solid black; /* Fjord - en fin kant under headeren */
+    }
+    .knapp_tekst {
+        display: flex; /* Bruk flexbox for å justere innholdet */
+        align-items: center; /* Juster ikon og tekst vertikalt */
+        justify-content: center; /* Sentraliser innholdet horisontalt */
+        gap: 8px; /* Legg til avstand mellom tekst og ikon */
+        font-weight: normal; /* Fjern fet skrift hvis ønsket */
+        color: black;
+        font-size: 18px;
+    }
+    
+    .knapp_tekst svg {
+        width: 20px; /* Juster ikonstørrelsen */
+        height: 20px;
+    }
+    h1{
+        font-size: 40px;
+    
+    }
+    .knapp_tekst{
+        text-decoration: none;
+        margin-top: 13px;
+    }
+    .text_box {
+        margin-top: 20px;
+        height: 480px; /* Fast høyde */
+        width: 990px; /* Fast bredde */
+        font-size: 20px;
+        border-radius: 10px;
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.15); /* Lettere skygge */
+        padding: 15px;
+        border: 2px solid black;
+        background: white; /* Himmel (10%) - lys, behagelig bakgrunn for lesbarhet */
+        color: #414681; /* Blåveis - god kontrast mot lys bakgrunn */
+        outline: none;
+        overflow-y: auto; /* Aktiverer scrolling for lange tekster */
+        overflow-x: hidden; /* Skjuler horisontal scrolling */
+        word-wrap: break-word; /* Bryter lange ord slik at de ikke skaper horisontal scrolling */
+        white-space: pre-wrap; /* Bevarer linjeskift fra brukerens inntasting */
+        border-color: #14828C; /* Fjord - pen kantfarge */
+    }
+
+    /* Placeholder tekst styling */
+    .text_box.placeholder {
+        color: #888; /* Grå farge for placeholder tekst */
+        font-style: italic; /* Kursiv for å skille fra vanlig tekst */
+    }
+.lese_knapp, .stopp_knapp, .fortsett_knapp, .pause_knapp {
+    background-color: #ACC8B3; /* Fjord - frisk og moderne */
+    color: white;
+    margin-top: 10px;
+    display: inline-block; /* Plasserer knappene ved siden av hverandre */
+    width: 222px; /* Ensartet bredde for alle knappene */
+    height: 50px; /* Ensartet høyde for alle knappene */
+    transition: all 0.3s ease;
+    border-radius: 10px;
+    border: 2px solid black; /* Sort ramme */
+    margin-right: 40px; /* Mellomrom mellom knappene */
+    text-align: center;
+    position: relative; /* For å kunne bruke box-shadow */
+}
+
+
+    .lese_knapp:hover, .stopp_knapp:hover, .fortsett_knapp:hover, .pause_knapp:hover {
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); /* Økt skygge på hover */
+        transform: translateY(-4px); /* Litt løft av knappen ved hover */
+    }
+    .lese_knapp:active, .stopp_knapp:active, .fortsett_knapp:active, .pause_knapp:active {
+        transform: translateY(4px); /* Flytt knappen ned for trykkeffekt */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Reduser skyggen */
+    }
+    .info_tekst{
+        margin-top:  20px;
+    }
+    /* Container for sliderne og select */
+    .controls {
+        display: flex;
+        flex-direction: column; /* Plasserer elementene under hverandre */
+        align-items: flex-start; /* Justerer elementene til venstre */
+        gap: 10px; /* Avstand mellom elementene */
+        margin-top: 10px;
+    }
+
+    /* Felles stil for hver kontroll (hastighet og volum) */
+    .controls div {
+        display: flex;
+        flex-direction: column; /* Plasserer label og slider vertikalt */
+        font-size: 14px; /* Mindre tekst for kompakt design */
+        color: #333; /* Mørk grå tekstfarge */
+    }
+
+    /* Slider stil - Reset for alle nettlesere først */
+    .controls input[type="range"] {
+        -webkit-appearance: none; /* Fjern standard browser styling */
+        appearance: none;
+        width: 200px; /* Passende bredde */
+        height: 6px;
+        background: #448355; /* Fjord - samme som knapper */
+        border-radius: 5px;
+        outline: none;
+        cursor: pointer;
+        margin: 10px 0;
+    }
+
+    /* Firefox-specific track styling */
+    .controls input[type="range"]::-moz-range-track {
+        height: 6px;
+        background: #448355; /* Fjord - samme som knapper */
+        border-radius: 5px;
+        border: none;
+    }
+
+    /* Edge/IE track */
+    .controls input[type="range"]::-ms-track {
+        height: 6px;
+        background: transparent;
+        border-color: transparent;
+        color: transparent;
+    }
+
+    /* Edge/IE fill lower part of slider */
+    .controls input[type="range"]::-ms-fill-lower {
+        background: #448355;
+        border-radius: 5px;
+    }
+
+    /* Edge/IE fill upper part of slider */
+    .controls input[type="range"]::-ms-fill-upper {
+        background: #448355;
+        border-radius: 5px;
+    }
+
+.controls,
+.controls label,
+.controls input,
+.controls span {
+    color: #333 !important; /* Tving mørk grå farge */
+}
+
+    /* Slider tommel - WebKit (Chrome, Safari, new Edge) */
+    .controls input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 12px;
+        height: 12px;
+        background: #448355; /* Himmel - komplementær til Fjord */
+        border-radius: 50%;
+        cursor: pointer;
+        margin-top: -3px; /* Sentrer tommel på track */
+        border: none;
+    }
+
+    /* Slider tommel - Firefox */
+    .controls input[type="range"]::-moz-range-thumb {
+        width: 12px;
+        height: 12px;
+        background: #448355; /* Himmel - komplementær til Fjord */
+        border-radius: 50%;
+        cursor: pointer;
+        border: none;
+    }
+    
+    /* Slider tommel - Edge/IE */
+    .controls input[type="range"]::-ms-thumb {
+        width: 12px;
+        height: 12px;
+        background: #448355; /* Himmel - komplementær til Fjord */
+        border-radius: 50%;
+        cursor: pointer;
+        border: none;
+    }
+
+    footer {
+    background-color: #ACC8B3; /* Havdyp - mørkere enn header for kontrast */
+    color: black;
+        text-align: center;
+        padding: 15px;
+        width: 100%;
+        margin-top: 20px;
+        font-size: 1em;
+        border-top: 3px solid #14828C; /* Fjord - matcher knapper og sliders */
+        position: relative;
+        bottom: 0;
+        margin-top: 20%;
+    
+    }
+    .logo {
+        height: 140px;
+        border-radius: 200px;
+        border-style: solid;
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+        position: absolute;
+        left: 40px; /* Juster avstand fra venstre */
+        top: 10px;  /* Juster avstand fra toppen */
+        background-color: #edfcf4;
+    }
+
+    select {
+        margin-top: 10px;
+        color: #333; /* Mørk grå tekstfarge */
+        background: #f9f9f9; /* Lys bakgrunn */
+        border: 1px solid #ccc; /* Lys grå kant */
+        border-radius: 5px; /* Lett avrunding */
+        appearance: none;
+        padding: 8px 17px; /* Enkel padding for bedre klikkbarhet */
+        font-size: 14px; /* Standard fontstørrelse */
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23000000" width="16px" height="16px"><path d="M7 10l5 5 5-5z"/></svg>'); /* Pil-ikon */
+        background-repeat: no-repeat;
+        background-position: calc(100% - 10px) center; /* Justerer pilens posisjon */
+        cursor: pointer; /* Endrer markøren til en peker */
+    }
+
+
+    select:focus {
+        outline: none; /* Fjerner standard fokusramme */
+        border-color: #ffffff; /* Mørkere kant ved fokus */
+    }
+    .om_tekst{
+        margin-left: 200px;
+        margin-right: 200px;
+        font-size: 20px;
+        border-radius: 5px;
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+        padding: 10px;
+    }
+    h1{
+        text-align: center;
+    }
+    nav{
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+    nav a{
+        text-decoration: none;
+        color: #000004;
+        transition: color 0.3s ease; 
+    }
+    .nav a:hover {
+        color: rgb(202, 104, 12); 
+        cursor: pointer;  
+    }
+    .highlight {
+        background-color: yellow;
+    }
+    .text_box.loading {
+    position: relative;
+    opacity: 0.7;
+}
+.text_box.loading::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    margin: -20px 0 0 -20px;
+    border: 4px solid rgba(0,0,0,0.1);
+    border-top-color: #009BC2; /* Himmel - matcher sliders */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+    @media (max-width: 480px) {
+        body {
+            padding: 5px;
+        }
+    
+        .text_box {
+            width: 90%;
+            height: 300px;
+            font-size: 14px;
+        }
+    
+        .controls {
+            width: 90%;
+            align-items: center;
+        }
+    
+        .controls input[type="range"] {
+            width: 90%;
+        }
+    
+        .logo {
+            height: 50px;
+            left: 5px;
+            top: 20px;
+        }
+
+    
+        footer {
+            font-size: 0.7em;
+            padding: 8px;
+        }
+    
+        h1 {
+            font-size: 18px;
+        }
+    }
+    
+    @media (min-width: 481px) and (max-width: 768px) {
+        body {
+            padding: 10px;
+        }
+    
+      
+    
+        .controls {
+            width: 80%;
+            align-items: center;
+        }
+    
+        .controls input[type="range"] {
+            width: 80%;
+        }
+    
+        .logo {
+            height: 60px;
+            left: 5px;
+            top: 30px;
+        }
+    
+
+    
+        footer {
+            font-size: 0.8em;
+            padding: 10px;
+        }
+    
+        h1 {
+            font-size: 22px;
+        }
+    }
+    
+    @media (min-width: 769px) and (max-width: 1024px) {
+   
+    
+        .controls {
+            width: 700px;
+        }
+    
+        .controls input[type="range"] {
+            width: 100%;
+        }
+    
+        .logo {
+            height: 80px;
+            left: 20px;
+            top: 20px;
+        }
+    
+
+    
+        footer {
+            font-size: 0.9em;
+        }
+    
+        h1 {
+            font-size: 30px;
+        }
+    }
+    
+    /* For ekstra store skjermer (valgfritt) */
+    @media (min-width: 1025px) {
+     
+    
+        .controls {
+            width: 900px;
+        }
+    
+        .controls input[type="range"] {
+            width: 300px;
+        }
+    
+        .logo {
+            height: 140px;
+            left: 40px;
+            top: 10px;
+        }
+
+    
+        footer {
+            font-size: 1em;
+        }
+    
+        h1 {
+            font-size: 40px;
+        }
+    }
+    
+/* Stilsetting for laste-indikator når TTS prosesseres */
+.text_box.loading {
+    position: relative;
+    opacity: 0.7;
+}
+
+.text_box.loading::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    margin: -20px 0 0 -20px;
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-top-color: #3498db;
+    border-radius: 50%;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+    

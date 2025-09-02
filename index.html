@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppleseren</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="opplserer.js" defer></script>
+</head>
+<body class="darkmode">
+    <header>
+       
+        <h1>Oppleseren</h1>
+        <p class="info_tekst">legg inn teksten for å få den lest opp.</p>
+    </header>
+    
+    <main>
+        <nav>
+            <a href="omOppleseren.html">Om Oppleseren</a>
+        </nav>
+        
+        
+ 
+</label>
+        <div class="text_box" contenteditable="true" data-placeholder="Legg til tekst eller skriv inn tekst"></div>
+        <div class="voice_select">
+            <select name="" id=""></select>
+        </div>
+        <div class="controls">
+            <div class="speed_control">
+                <label for="speed_slider">Hastighet:</label>
+                <input class="Hastighet" type="range" id="speed_slider" min="0.5" max="2" step="0.1" value="1">
+            </div>
+            <div class="volume_control">
+                <label for="volume_slider">Volum:</label>
+                <input type="range" id="volume_slider" min="0" max="1" step="0.1" value="1">
+                <span id="volume_value">1.0</span>
+            </div>
+        </div>
+        <button class="lese_knapp"><p class="knapp_tekst"> <strong>Les opp</strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
+            <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783"/>
+          </svg></p></button>
+        <button class="pause_knapp"><p class="knapp_tekst"> <strong>Pause</strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pause-circle" viewBox="0 0 16 16">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+            <path d="M5 6.25a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0zm3.5 0a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0z"/>
+          </svg></p></button>
+        <button class="fortsett_knapp"><p class="knapp_tekst"> <strong>Fortsett</strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+            <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445"/>
+          </svg></p></button>
+        <button class="stopp_knapp"><p class="knapp_tekst"> <strong>Stopp opplesning</strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-slash-circle" viewBox="0 0 16 16">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+            <path d="M11.354 4.646a.5.5 0 0 0-.708 0l-6 6a.5.5 0 0 0 .708.708l6-6a.5.5 0 0 0 0-.708"/>
+          </svg></p></button>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Oppleseren. Alle rettigheter forbeholdt.</p>
+    </footer>
+
+
+
+    
+</body>
+</html>
