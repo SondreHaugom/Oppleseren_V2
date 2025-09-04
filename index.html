@@ -23,13 +23,16 @@
  
 </label>
         <div class="text_box" contenteditable="true" data-placeholder="Legg til tekst eller skriv inn tekst"></div>
+        <section class="controlPanel">
         <div class="voice_select">
             <select name="" id=""></select>
         </div>
-        <div class="controls">
+
+        
+              <div class="controls">
             <div class="speed_control">
                 <label for="speed_slider">Hastighet:</label>
-                <input class="Hastighet" type="range" id="speed_slider" min="0.5" max="2" step="0.1" value="1">
+                <input class="Hastighet" type="range" id="speed_slider" min="0.5" max="2" step="0.1" value="1,02">
             </div>
             <div class="volume_control">
                 <label for="volume_slider">Volum:</label>
@@ -52,6 +55,12 @@
             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
             <path d="M11.354 4.646a.5.5 0 0 0-.708 0l-6 6a.5.5 0 0 0 .708.708l6-6a.5.5 0 0 0 0-.708"/>
           </svg></p></button>
+        </section>
+
+        <p>
+            Denne oppleseren bruker OpenAI sin TTS-modell. Det kan derfor forekomme feil i opplesingen. Husk også å ikke sende inn sensitiv informasjon
+        </p>
+      
     </main>
 
     <footer>

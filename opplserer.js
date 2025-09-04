@@ -14,12 +14,12 @@ let textChunks = [];
 function initializeVoiceOptions() {
     // OpenAI sine tilgjengelige stemmer
     const openaiVoices = [
-        { name: "Alloy - Nøytral", value: "alloy" },
-        { name: "Echo - Dyp", value: "echo" },
-        { name: "Fable - Britisk", value: "fable" },
-        { name: "Onyx - Kraftig", value: "onyx" },
-        { name: "Nova - Feminin", value: "nova" },
-        { name: "Shimmer - Lys", value: "shimmer" }
+        { name: "Alloy", value: "alloy" },
+        { name: "Echo", value: "echo" },
+        { name: "Fable", value: "fable" },
+        { name: "Onyx", value: "onyx" },
+        { name: "Nova", value: "nova" },
+        { name: "Shimmer", value: "shimmer" }
     ];
     
     // Tøm eksisterende alternativer
@@ -65,41 +65,63 @@ audioElement.addEventListener('error', function(e) {
     isPlaying = false;
 });
 
+function addPlaceholder() {
+    const placeHolder = textBox.getAttribute('data-placeholder'); 
 
-
-// Funksjon for å bruke OpenAI sin TTS-API til å lese opp tekst
-async function fetchOpenAITTS(text, voice = "nova ", model = "tts-1") {
-    const apiKey = ""; // Erstatt med din faktiske API-nøkkel eller last inn sikkert
-    const url = "https://api.openai.com/v1/audio/speech";
-    
-    try {
-        const response = await fetch(url, {
-            method: "POST",
-            headers: {
-                "Authorization": `Bearer ${apiKey}`,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                model: model,
-                input: text,
-                voice: voice,
-                response_format: "mp3"
-            })
-        });
-
-        if (!response.ok) {
-            const errorData = await response.json().catch(() => ({}));
-            throw new Error(`TTS-feil: ${response.status} ${errorData.error?.message || 'Ukjent feil'}`);
-        }
-
-        const audioBlob = await response.blob();
-        const audioUrl = URL.createObjectURL(audioBlob);
-        return audioUrl;
-    } catch (error) {
-        console.error("TTS-feil:", error);
-        alert(`Feil ved opplesning: ${error.message}`);
-        throw error;
+    // Vis placeholder tekst hvis tekstboksen er tom
+    if (textBox.innerText.trim() === '') {
+        textBox.innerText = placeHolder;
+        textBox.classList.add('placeholder');
     }
+}
+// Fjern placeholder når brukeren klikker eller fokuserer
+textBox.addEventListener('focus', function() {
+    if (textBox.classList.contains('placeholder')) {
+        textBox.innerText = '';
+        textBox.classList.remove('placeholder');
+    }
+});
+
+// Vis placeholder igjen hvis tekstboksen blir tom
+textBox.addEventListener('blur', function() {
+    if (textBox.innerText.trim() === '') {
+        const placeholder = textBox.getAttribute('data-placeholder');
+        textBox.innerText = placeholder;
+        textBox.classList.add('placeholder');
+    }
+});
+
+// Fjern placeholder når brukeren begynner å skrive
+textBox.addEventListener('input', function() {
+    if (textBox.classList.contains('placeholder')) {
+        textBox.innerText = '';
+        textBox.classList.remove('placeholder');
+    }
+});
+
+
+
+async function fetchAudioFromServer(text, voice) {
+    const response = await fetch('http://localhost:3000/api/tts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text, voice })
+    });
+    
+    if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Server response:", errorText);
+        throw new Error("Feil fra serveren: " + errorText);
+    }
+
+    const audioBlob = await response.blob();
+    console.log("Mottatt audio blob:", audioBlob.size, "bytes", audioBlob.type);
+    
+    const audioUrl = URL.createObjectURL(audioBlob);
+    console.log("Audio URL opprettet:", audioUrl);
+
+    const audio = new Audio(audioUrl);
+    audio.play();
 }
 
 // En enkel funksjon for å spille av lyd fra en URL
@@ -119,24 +141,26 @@ function playAudio(audioUrl) {
 }
 
 document.querySelector(".lese_knapp").addEventListener("click", async () => {
+    if (textBox.classList.contains('placeholder')) {
+        alert('Vennligst legg til tekst før opplesning');
+        return;
+    }
     if (textBox.innerText) {
-        // Hent valgt stemme eller bruk "alloy" som standard hvis ingen er valgt
         const selectedVoice = voiceSelect.value || "alloy";
         const text = textBox.innerText.trim();
-
         textBox.classList.add("loading");
         try {
-            const audioUrl = await fetchOpenAITTS(text, selectedVoice);
-            playAudio(audioUrl);
+            await fetchAudioFromServer(text, selectedVoice);
+            isPlaying = true;
         } catch (error) {
             console.error("Feil ved opplesning:", error);
+            alert("Kunne ikke generere tale. Se konsollen for detaljer.");
         }
         textBox.classList.remove("loading");
     } else {
         alert('Vennligst legg til tekst før opplesning');
     }
 });
-
 
 document.querySelector(".pause_knapp").addEventListener("click", () => {
     if (isPlaying) {
@@ -153,7 +177,7 @@ document.querySelector(".fortsett_knapp").addEventListener("click", () => {
 })
 document.querySelector(".stopp_knapp").addEventListener("click", () => {
     if (isPlaying) {
-        audioElement.pause();
+        audioElement.cancel();
         isPlaying = false;
     }
 })
